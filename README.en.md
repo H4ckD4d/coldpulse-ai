@@ -61,3 +61,13 @@ We support lawful efforts to protect lives, conduct rescues and provide responsi
 [Threat model](docs/THREAT_MODEL.md) · [Red Team engineering](docs/REDTEAM_ENGINEERING.md) · [Roadmap](docs/ROADMAP.md) · [Codex instructions](AGENTS.md)
 
 **© 2026 Chris Cruz (@h4ckd4d).**
+
+## Next technical increment (v0.2 candidate)
+
+Consecutive out-of-range reading alerts; never controls equipment.
+
+```bash
+coldpulse analyze samples/telemetry.csv --min-consecutive 3
+```
+
+**Chris Cruz — @h4ckd4d**.
