@@ -61,3 +61,23 @@ Apoyamos las labores legales de protección de vidas, rescate y seguridad de pro
 [Threat model](docs/THREAT_MODEL.md) · [Red Team engineering](docs/REDTEAM_ENGINEERING.md) · [Roadmap](docs/ROADMAP.md) · [Codex instructions](AGENTS.md)
 
 **© 2026 Chris Cruz (@h4ckd4d).**
+
+## Siguiente mejora técnica (v0.2 candidate)
+
+Alertas por lecturas consecutivas fuera de límites; no controla equipos.
+
+```bash
+coldpulse analyze samples/telemetry.csv --min-consecutive 3
+```
+
+**Chris Cruz — @h4ckd4d**.
+
+## Mejora candidata v0.3
+
+Offline sensor summary (not automated control):
+
+```bash
+coldpulse summary samples/telemetry.csv
+```
+
+[Commercial roadmap](docs/COMMERCIAL.md) · Chris Cruz — @h4ckd4d.

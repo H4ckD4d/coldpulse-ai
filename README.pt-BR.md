@@ -61,3 +61,23 @@ Declaramos apoio ao trabalho lícito de proteção de vidas, salvamento e defesa
 [Threat model](docs/THREAT_MODEL.md) · [Red Team engineering](docs/REDTEAM_ENGINEERING.md) · [Roadmap](docs/ROADMAP.md) · [Codex instructions](AGENTS.md)
 
 **© 2026 Chris Cruz (@h4ckd4d).**
+
+## Próximo incremento técnico (v0.2 candidate)
+
+Alertas por leituras consecutivas fora dos limites; não controla equipamentos.
+
+```bash
+coldpulse analyze samples/telemetry.csv --min-consecutive 3
+```
+
+**Chris Cruz — @h4ckd4d**.
+
+## Incremento v0.3 candidato
+
+Offline sensor summary (not automated control):
+
+```bash
+coldpulse summary samples/telemetry.csv
+```
+
+[Commercial roadmap](docs/COMMERCIAL.md) · Chris Cruz — @h4ckd4d.
