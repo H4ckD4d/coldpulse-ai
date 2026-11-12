@@ -27,3 +27,14 @@ class CoreTests(unittest.TestCase):
                 analyze(p)
             with self.assertRaises(ValueError):
                 analyze(p, min_consecutive=0)
+
+    def test_sensor_summary_average(self):
+        from coldpulse.core import summarize
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'temp.csv';p.write_text('sensor_id,temperature_c\na,2\na,4\n')
+            self.assertEqual(summarize(p)['sensors']['a']['mean_c'],3)
+    def test_sensor_summary_invalid_float(self):
+        from coldpulse.core import summarize
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'temp.csv';p.write_text('sensor_id,temperature_c\na,nan\n')
+            with self.assertRaises(ValueError): summarize(p)

@@ -36,9 +36,32 @@ def configure(sub):
     p=sub.add_parser('analyze',help='Analyze CSV readings')
     p.add_argument('path')
     p.add_argument('--min-consecutive', type=int, default=1, help='Alert only after N consecutive out-of-range readings per sensor')
+    s=sub.add_parser('summary',help='Per-sensor offline statistics')
+    s.add_argument('path')
 
 def run(args):
-    return analyze(args.path, args.min_consecutive)
+    return summarize(args.path) if args.command=='summary' else analyze(args.path, args.min_consecutive)
 
 def demo():
     return analyze(Path(__file__).resolve().parents[2]/'samples'/'telemetry.csv')
+
+
+def summarize(path):
+    """Offline descriptive sensor statistics. Never controls equipment."""
+    import math
+    summary={}
+    with open(path,newline='',encoding='utf-8') as stream:
+        reader=csv.DictReader(stream)
+        if not {'sensor_id','temperature_c'}.issubset(reader.fieldnames or []):
+            raise ValueError('CSV missing required headers')
+        for row in reader:
+            sensor=row['sensor_id']
+            if not sensor: raise ValueError('Missing sensor ID')
+            value=float(row['temperature_c'])
+            if not math.isfinite(value): raise ValueError('Non-finite value')
+            item=summary.setdefault(sensor,{'count':0,'sum':0.0,'min':value,'max':value})
+            item['count']+=1;item['sum']+=value
+            item['min']=min(item['min'],value);item['max']=max(item['max'],value)
+    return {'sensors':{k:{'samples':v['count'],'mean_c':round(v['sum']/v['count'],3),
+                          'min_c':v['min'],'max_c':v['max']} for k,v in sorted(summary.items())},
+            'warning':'Offline statistics only; not for controlling physical equipment.'}

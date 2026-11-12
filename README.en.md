@@ -71,3 +71,13 @@ coldpulse analyze samples/telemetry.csv --min-consecutive 3
 ```
 
 **Chris Cruz — @h4ckd4d**.
+
+## v0.3 candidate enhancement
+
+Offline sensor summary (not automated control):
+
+```bash
+coldpulse summary samples/telemetry.csv
+```
+
+[Commercial roadmap](docs/COMMERCIAL.md) · Chris Cruz — @h4ckd4d.
